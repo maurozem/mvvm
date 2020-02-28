@@ -1,14 +1,16 @@
 package ms.zem.mvvm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class NumberListViewModel(private val repository: Repository): ViewModel() {
 
-    var numberList = MutableLiveData<List<Int>>()
+    private var mutableNumberList = MutableLiveData<List<Int>>()
+    var numberList: LiveData<List<Int>> = mutableNumberList
 
     fun getNumbers(){
-        numberList = repository.getNumbers()
+        mutableNumberList.value = repository.getNumbers().value
     }
 
 }

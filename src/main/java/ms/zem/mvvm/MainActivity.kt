@@ -28,25 +28,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         recyclerView = findViewById(R.id.list)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                recyclerView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         botao = findViewById(R.id.botao)
         botao.setOnClickListener {
             viewModel.getNumbers()
             Log.d("main", "gerar")
         }
     }
-
     private fun initObservers() {
         viewModel.numberList.observe(this, Observer {
-            with(recyclerView) {
-                layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-                adapter = ListNumberAdapter(it)
-                addItemDecoration(
-                    DividerItemDecoration(
-                        recyclerView.context,
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
-            }
+            recyclerView.adapter = ListNumberAdapter(it)
         })
     }
 }
