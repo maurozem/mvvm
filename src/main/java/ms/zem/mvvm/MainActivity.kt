@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity() {
         )
         botao = findViewById(R.id.botao)
         botao.setOnClickListener {
-            viewModel.getNumbers()
-            Log.d("main", "gerar")
+            viewModel.commando(CommandViewModel.OnClick)
         }
     }
     private fun initObservers() {

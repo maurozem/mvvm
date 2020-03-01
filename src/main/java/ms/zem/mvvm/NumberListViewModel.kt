@@ -13,4 +13,10 @@ class NumberListViewModel(private val repository: Repository): ViewModel() {
         mutableNumberList.value = repository.getNumbers().value
     }
 
+    fun commando(command: CommandViewModel){
+        when (command) {
+            is CommandViewModel.OnClick -> getNumbers()
+        }
+    }
+
 }
