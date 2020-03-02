@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NumberListViewModel(private val repository: Repository): ViewModel() {
+class NumberListViewModel(private val useCase: NumberListUseCase): ViewModel() {
 
     private var mutableNumberList = MutableLiveData<List<Int>>()
     var numberList: LiveData<List<Int>> = mutableNumberList
 
     fun getNumbers(){
-        mutableNumberList.value = repository.getNumbers().value
+        mutableNumberList.value = MutableLiveData(useCase.getNumbers()).value
     }
 
     fun commando(command: CommandViewModel){

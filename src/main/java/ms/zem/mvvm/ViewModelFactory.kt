@@ -6,13 +6,14 @@ import java.lang.IllegalArgumentException
 
 class ViewModelFactory: ViewModelProvider.NewInstanceFactory() {
 
+    //    private val repository = RepositoryMock()
     private val repository = Repository()
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         with(modelClass) {
             when {
                 isAssignableFrom(NumberListViewModel::class.java) ->
-                    NumberListViewModel(repository)
+                    NumberListViewModel(NumberListUseCase(repository))
                 else ->
                     throw IllegalArgumentException("viewmodel desconhecida: ${modelClass.name}")
             }
